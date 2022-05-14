@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto';
+  background-color: hsl(0, 0%, 98%);
+  color: #000;
+}
+
+h1 {
+  padding: 7vh;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: hsl(0, 0%, 7%);
+    color: hsl(230, 35%, 70%);
+  }
+}
