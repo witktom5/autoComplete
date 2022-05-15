@@ -12,12 +12,51 @@ body {
 
 h1 {
   padding: 7vh;
+  width: fit-content;
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
+}
+
+.autocomplete-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.autocomplete-input {
+  margin-top: 0.7em;
+  text-indent: 14px;
+  height: 24px;
+  width: 250px;
+  border: solid 1px black;
+  padding: 0;
+  border-radius: 999px;
+}
+
+.autocomplete-hint {
+  width: max(220px);
+  color: hsl(0, 0%, 25%);
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px hsl(0, 0%, 75%);
+  border-bottom: none;
+  background-color: hsl(0, 0%, 96%);
+  cursor: pointer;
+}
+
+.autocomplete-hint:last-of-type {
+  border-bottom: solid 1px hsl(0, 0%, 75%);
+}
+
+.autocomplete-hint:hover {
+  background-color: hsl(0, 0%, 89%);
+  color: hsl(0, 0%, 10%);
 }
 
 @media (prefers-color-scheme: dark) {

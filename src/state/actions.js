@@ -4,6 +4,7 @@ export const actions = {
   FETCH_USERS: 'FETCH_USERS',
   SET_INPUT: 'GET_INPUT',
   GET_MATCHES: 'GET_MATCHES',
+  CLEAR_MATCHES: 'CLEAR_MATCHES',
 };
 
 export const fetchUsers = async (dispatch) => {
@@ -25,5 +26,11 @@ export const getMatches = (input) => {
   return {
     type: actions.GET_MATCHES,
     payload: input,
+  };
+};
+
+export const clearMatches = () => {
+  return {
+    type: actions.CLEAR_MATCHES,
   };
 };
