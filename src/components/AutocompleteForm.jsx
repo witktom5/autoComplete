@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers, getMatches, setInput } from '../state/actions';
 
 import AutocompleteHint from './AutocompleteHint';
 
 function AutocompleteForm() {
-  const [hintAccepted, setHintAccepted] = useState(true);
-
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.users);
   const matchesState = useSelector((state) => state.matches);
@@ -18,12 +16,14 @@ function AutocompleteForm() {
     dispatch(fetchUsers);
   }, [dispatch]);
 
-  //  Find matching usernames
+  //  Find matching usernames, sort alphabetically
 
   const checkMatches = (userState, query) =>
-    userState.filter(
-      (user) => query !== '' && user.username.toLowerCase().startsWith(query)
-    );
+    userState
+      .filter(
+        (user) => query !== '' && user.username.toLowerCase().startsWith(query)
+      )
+      .sort((a, b) => a.username.localeCompare(b.username));
 
   //  On text input change dispatch matching usernames
 
@@ -34,17 +34,31 @@ function AutocompleteForm() {
     );
   };
 
+  const onKeyDown = (e) => {
+    if (e.key === 'ArrowDown') {
+      e.currentTarget.nextSibling && e.currentTarget.nextSibling.focus();
+    }
+  };
+
   return (
     <>
       <form className='autocomplete-form' autoComplete='off'>
         <label htmlFor='autocompleteInput'>Find by username</label>
-        <input
-          type='text'
-          value={inputState}
-          id='autocompleteInput'
-          className='autocomplete-input'
-          onChange={onInputChange}
-        />
+        <div className='autocomplete-input-container' onKeyDown={onKeyDown}>
+          <input
+            type='text'
+            value={inputState}
+            id='autocompleteInput'
+            className='autocomplete-input'
+            onChange={onInputChange}
+          />
+          <button
+            className='autocomplete-button'
+            onClick={(e) => e.preventDefault()}
+          >
+            Submit
+          </button>
+        </div>
         {matchesState.map((user, id) => (
           <AutocompleteHint key={id} username={user.username} />
         ))}
