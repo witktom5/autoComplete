@@ -1,15 +1,16 @@
 import React from 'react';
-import Dummy from './AutocompleteForm';
-import './index.css';
+import AutocompleteForm from './components/AutocompleteForm';
+import { Provider } from 'react-redux';
+import store from './state/store.js';
 
 const App = () => {
   return (
-    <>
+    <Provider store={store}>
       <div className='container'>
         <h1>Autocomplete form</h1>
-        <Dummy />
+        <AutocompleteForm />
       </div>
-    </>
+    </Provider>
   );
 };
 
